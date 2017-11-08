@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title>签名测试</title>
+    <script src="../bower_components/angular/angular.js"></script>
+    <link rel="stylesheet" href="hand-ionic-plugin-sign.css">
+</head>
+<body ng-controller="MainCtrl">
+<button ng-click="openSign()">打开签字</button>
+<hpm-sign ng-show="isShowSign"></hpm-sign>
+<script>
+    angular.module('hpmModule', []);
+    var app = angular.module('app', ['hpmModule']).controller('MainCtrl', function ($scope) {
+        $scope.isShowSign = false;
+        $scope.openSign = function(){
+            $scope.isShowSign = !$scope.isShowSign;
+        }
+    });
+</script>
+<script src="hand-ionic-plugin-sign.js"></script>
+</body>
+</html>
