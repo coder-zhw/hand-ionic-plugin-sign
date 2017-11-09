@@ -8,10 +8,10 @@
 </head>
 <body ng-controller="MainCtrl">
 <button ng-click="openSign()">打开签字</button>
-<hpm-sign ng-show="isShowSign"></hpm-sign>
+<hms-sign ng-show="isShowSign"></hms-sign>
 <script>
-    angular.module('hpmModule', []);
-    var app = angular.module('app', ['hpmModule']).controller('MainCtrl', function ($scope) {
+    angular.module('hmsModule', []);
+    var app = angular.module('app', ['hmsModule']).controller('MainCtrl', function ($scope) {
         $scope.isShowSign = false;
         $scope.openSign = function(){
             $scope.isShowSign = !$scope.isShowSign;

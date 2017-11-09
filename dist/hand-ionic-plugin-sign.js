@@ -1,8 +1,8 @@
 (function (angular) {
     "use strict";
 
-    angular.module('hpmModule')
-        .directive('hpmSign', hmsSignDirective);
+    angular.module('hmsModule')
+        .directive('hmsSign', hmsSignDirective);
 
     function hmsSignDirective() {
         var debug = false;
