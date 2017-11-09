@@ -5,6 +5,13 @@
         .directive('hpmSign', hmsSignDirective);
 
     function hmsSignDirective() {
+        var debug = false;
+        var templateUrl;
+        if (debug) {
+            templateUrl = './hand-ionic-plugin-lov.html';
+        } else {
+            templateUrl = 'build/lib/hand-ionic-plugin-sign/hand-ionic-plugin-sign.html';
+        }
         // 背景canvas
         var global = {
             canvas: '',
@@ -184,7 +191,7 @@
         return {
             restrict: "E",
             replace: true,
-            templateUrl: './hand-ionic-plugin-sign.html',
+            templateUrl: templateUrl,
             compile: compileFn
         };
 
