@@ -55,7 +55,7 @@
 
         //触摸开始事件
         function touchStart() {
-            console.log('touchStart.config'+angular.toJson(config, true));
+            console.log('touchStart.config' + angular.toJson(config, true));
             var canvas = document.createElement('canvas');
             signNode.appendChild(canvas);
             canvas.width = config.width;
@@ -75,6 +75,7 @@
             console.log('touchEnd');
             global.context.save();
         }
+
         function draw(context) {
             if (global.cut > 1) {
                 console.log('draw');
@@ -85,9 +86,9 @@
                 context.beginPath();
 
                 context.moveTo(global.point.x, global.point.y);
-                console.log('('+global.point.x+','+global.point.y+')');
+                console.log('(' + global.point.x + ',' + global.point.y + ')');
                 context.lineTo(global.nextPoint.x, global.nextPoint.y);
-                console.log('('+global.nextPoint.x+','+global.nextPoint.y+')');
+                console.log('(' + global.nextPoint.x + ',' + global.nextPoint.y + ')');
                 console.log('画笔:' + global.cut);
                 context.stroke();
 
@@ -119,6 +120,10 @@
             return {
                 // 编译前
                 pre: function preLink(scope, elem, attrs, controller) {
+                    // 函数声明
+                    scope.save = save; // 保存
+                    scope.redo = redo; // 撤销
+                    scope.redraw = redraw; // 重画
                     //设置背景填充颜色
                     global.context.fillStyle = config.bgColor;
                     //设置画布背景
@@ -135,6 +140,40 @@
                      */
                     setInterval(loopPoint, 10);
 
+                    function drawImg(context, img) {
+                        return context.drawImage(img, 0, 0);
+                    }
+
+                    function save() {
+                        var allCanvas = signNode.getElementsByTagName('canvas');
+                        var canvas = node.getElementsByClassName('hms-sign-cav-bg')[0];
+                        var context = canvas.getContext('2d');
+                        var canvasLength = allCanvas.length - 1;
+                        for (var i = canvasLength; i > 0; i--) {
+                            drawImg(context, allCanvas[i]);
+                            signNode.removeChild(allCanvas[i]);
+                        }
+                        var data = canvas.toDataURL();
+                        return data
+                    }
+
+                    // 撤销
+                    function redo() {
+                        var allCanvas = signNode.getElementsByTagName('canvas');
+                        var canvasLength = allCanvas.length - 1;
+                        if (canvasLength > 0) {
+                            signNode.removeChild(allCanvas[canvasLength]);
+                        }
+                    }
+
+                    // 重画
+                    function redraw() {
+                        var allCanvas = signNode.getElementsByTagName('canvas');
+                        var canvasLength = allCanvas.length - 1;
+                        for (var i = canvasLength; i > 0; i--) {
+                            signNode.removeChild(allCanvas[i]);
+                        }
+                    }
                 },
                 // 编译后
                 post: function postLink(scope, elem, attrs, controller) {
@@ -145,7 +184,7 @@
         return {
             restrict: "E",
             replace: true,
-            templateUrl:'./hand-ionic-plugin-sign.html',
+            templateUrl: './hand-ionic-plugin-sign.html',
             compile: compileFn
         };
 

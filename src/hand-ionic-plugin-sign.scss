@@ -1,8 +1,12 @@
 .hms-sign {
-  //z-index: 200;
+  z-index: 1100;
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 100%;
   .hms-sign-cav {
     canvas {
-      position: absolute;
+      //position: absolute;
     }
   }
   .hms-sign-btn {
@@ -14,5 +18,10 @@
     //  justify-content: center;
     //  width: 33.33%;
     //}
+    .col{
+      display: inline-block;
+      width: 33%;
+      text-align: center;
+    }
   }
 }
