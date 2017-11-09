@@ -1,10 +1,10 @@
 {
-  "name": "handLib",
-  "homepage": "https://github.com/HandMobileForce/handLib",
+  "name": "hand-ionic-plugin-sign",
+  "homepage": "https://github.com/coder-zhw/hand-ionic-plugin-sign",
   "authors": [
-    "qi.he <qi.he@hand-china.com>"
+    "Edward.Zhang<wei.zhang02@hand-china.com>"
   ],
-  "description": "hand指令库",
+  "description": "ionic 签字插件",
   "main": "",
   "license": "MIT",
   "ignore": [
